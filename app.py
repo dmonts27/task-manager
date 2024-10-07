@@ -14,12 +14,12 @@ def connect_db():
     return conn
 
 # Home route to display tasks
-@app.route('/')
+@app.route('/', methods=['GET'])
 def index():
     conn = connect_db()
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM tasks')
-    tasks = cursor.fetchall()  # Fetch all tasks from the database
+    tasks = cursor.fetchall()
     conn.close()
     return render_template('index.html', tasks=tasks)
 
